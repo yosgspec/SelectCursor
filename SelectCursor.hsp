@@ -1,0 +1,52 @@
+#runtime "hsp3cl"
+
+;カーソル選択モジュール
+#module @SelectCursor
+	#uselib "crtdll"
+	#cfunc getch "_getch"
+
+	;カーソルの移動
+	#deffunc local move int x,int max
+		cursor+=x
+		if cursor<0: cursor=0
+		if max-1<cursor: cursor=max-1
+	return
+
+	#defcfunc SelectCursor array items
+		cursor=0
+		goto*begin
+
+		;カーソルの表示
+		*view
+			dim select,length(items)
+			select(cursor)=1
+			s=""
+			foreach items
+				if select(cnt): s+=strf("[%s]",items(cnt)): else: s+=items(cnt)
+			loop
+			mes strf("%s\r",s),1
+		return
+
+		*begin
+		gosub*view
+		repeat
+			ch=getch()
+			if ch=$0d {
+				mes
+				break
+			}
+			if ch=$e0 {
+				ch=getch()
+				if ch=$4b: move -1,length(items)	;左
+				if ch=$4d: move 1,length(items) 	;右
+			}
+			gosub*view
+		loop
+	return cursor
+#global
+
+items="壱","弍","参","四","五","六","七","八","九","拾"
+repeat
+	cursor=SelectCursor(items)
+	mes strf("SelectedItem: %s",items(cursor))
+loop
