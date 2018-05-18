@@ -32,8 +32,8 @@ Module SelectCursor
 				Console.WriteLine()
 				Return cursor
 			End If
-			If ch.Key=ConsoleKey.LeftArrow Then move(-1,items.Count)
-			If ch.Key=ConsoleKey.RightArrow Then move(1,items.Count)
+			If ch.Key=ConsoleKey.LeftArrow Then move(-1,items.Count)	'左
+			If ch.Key=ConsoleKey.RightArrow Then move(1,items.Count)	'右
 			view()
 		Loop
 	End Function

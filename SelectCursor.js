@@ -29,8 +29,8 @@ const SelectCursor=items=>{
 				process.stdin.removeListener("keypress",self);
 				return resolve(cursor);
 			}
-			if(ch.name=="right") move(1,items.length);
-			if(ch.name=="left") move(-1,items.length);
+			if(ch.name=="left") move(-1,items.length);	//左
+			if(ch.name=="right") move(1,items.length);	//右
 			view();
 		});
 	});

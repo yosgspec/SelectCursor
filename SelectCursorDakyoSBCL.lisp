@@ -1,0 +1,27 @@
+(defun SelectCursor(items)
+	(let ((s "")) 
+		(dolist (v items)
+			(setf s (format nil "~A ~A" s v))
+		)
+		(setf s (format nil "~A~%" s))
+		(dotimes (i (length items))
+			(setf s (format nil "~A [~2d]" s i))
+		)
+		(format t "~A~%> " s)(finish-output nil)
+	)
+	(loop
+		(let ((cursor (or(parse-integer (read-line) :junk-allowed t) -1)))
+			(if(< -1 cursor (length items))(progn
+				(format t "SelectedItem: ~A~%" (elt items cursor))
+				(return cursor)
+			)(progn
+				(format t "入力された値が不正です。~%> ")
+				(finish-output nil)
+			))
+		)
+	)
+)
+
+(let ((items '("　壱" "　弍" "　参" "　四" "　五" "　六" "　七" "　八" "　九" "　拾")))
+	(print (SelectCursor items))
+)

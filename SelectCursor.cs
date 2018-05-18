@@ -30,8 +30,8 @@ static class SelectCursors{
 				Console.WriteLine();
 				return cursor;
 			}
-			if(ch.Key==ConsoleKey.LeftArrow) move(-1,items.Count);
-			if(ch.Key==ConsoleKey.RightArrow) move(1,items.Count);
+			if(ch.Key==ConsoleKey.LeftArrow) move(-1,items.Count);	//左
+			if(ch.Key==ConsoleKey.RightArrow) move(1,items.Count);	//右
 			view();
 		}
 	}
